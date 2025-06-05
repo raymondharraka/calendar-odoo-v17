@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Estados de Cita (Datos Iniciales) -->
+    <record id="state_cancelada" model="appointment.state">
+        <field name="name">Cancelada</field>
+        <field name="code">cancelada</field>
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="color">#000000</field>
+    </record>
+
+    <record id="state_lista_espera" model="appointment.state">
+        <field name="name">En Lista de Espera</field>
+        <field name="code">lista_espera</field>
+        <field name="sequence">2</field>
+        <field name="color">#FFA500</field>
+    </record>
+
+    <record id="state_no_contesta" model="appointment.state">
+        <field name="name">No Contesta / No Llegó</field>
+        <field name="code">no_contesta</field>
+        <field name="sequence">3</field>
+        <field name="color">#FF0000</field>
+    </record>
+
+    <record id="state_confirmada" model="appointment.state">
+        <field name="name">Confirmada</field>
+        <field name="code">confirmada</field>
+        <field name="sequence">4</field>
+        <field name="color">#008000</field>
+    </record>
+
+    <record id="state_avisar_cambio" model="appointment.state">
+        <field name="name">Avisar de Cambio</field>
+        <field name="code">avisar_cambio</field>
+        <field name="sequence">5</field>
+        <field name="color">#FFFF00</field>
+    </record>
+
+    <record id="state_en_consulta" model="appointment.state">
+        <field name="name">En Consulta</field>
+        <field name="code">en_consulta</field>
+        <field name="sequence">6</field>
+        <field name="color">#0000FF</field>
+    </record>
+
+    <record id="state_realizada" model="appointment.state">
+        <field name="name">Realizada</field>
+        <field name="code">realizada</field>
+        <field name="sequence">7</field>
+        <field name="color">#008000</field>
+    </record>
+
+    <record id="state_urgente_vip" model="appointment.state">
+        <field name="name">Urgente/VIP</field>
+        <field name="code">urgente_vip</field>
+        <field name="sequence">8</field>
+        <field name="color">#FFC0CB</field>
+    </record>
+</odoo>

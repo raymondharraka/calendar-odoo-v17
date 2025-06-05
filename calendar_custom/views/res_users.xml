@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_users_form_inherit_joint_calendar_clodofy" model="ir.ui.view">
+        <field name="name">res.users.form.inherit.joint.calendar.clodofy</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <field name="meeting_assignee_sequence" position="after">
+                <field name="joint_calendar_id" invisible="not is_meeting_assignee"/>
+            </field>
+        </field>
+    </record>
+</odoo>

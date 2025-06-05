@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Extensión de la vista de formulario para incluir el campo de estado con indicador -->
+    <record id="view_calendar_event_form_custom_state" model="ir.ui.view">
+        <field name="name">calendar.event.form.custom.state</field>
+        <field name="model">calendar.event</field>
+        <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button type="object"
+                        name="action_open_attendee_partners"
+                        class="oe_stat_button"
+                        icon="fa-users"
+                        invisible="meeting_attendee_count == 0">
+                    <field name="meeting_attendee_count" widget="statinfo" string="Asistentes"/>
+                </button>
+            </xpath>
+            <xpath expr="//div[contains(@class, 'oe_title') and contains(@class, 'mb-3')]" position="before">
+                <div class="d-flex justify-content-end o_state_container w-100">
+                    <field name="state_color_id" invisible="1"/>
+                    <field name="state_color" widget="color" invisible="state_color_id == 7"/>
+                    <!--                    <div invisible="state_color_id != 7">-->
+                    <!--                        <i class="fs-1 text-success fa fa-check-circle mr8"/>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="text-success" invisible="state_color_id != 7">-->
+                    <!--                        <i class="fa fa-check-circle me-2 fs-1"/>-->
+                    <!--                    </div>-->
+                    <field name="show_icon" widget="boolean_button" readonly="1" class="text-success"
+                           invisible="state_color_id != 7" options="{'icon': 'fa fa-check-circle'}"/>
+                    <field name="state_appointment" widget="statusbar" class="o_task_state_widget"
+                           options='{"clickable":true,"fold_field":"active"}'/>
+                </div>
+            </xpath>
+            <field name="description" position="after">
+                <field name="joint_calendar_id" invisible="1"/>
+            </field>
+            <field name="start" position="before">
+                <field name="bg_color" invisible="1"/>
+            </field>
+            <xpath expr="//field[@name='location']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='videocall_location']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//button[@name='set_discuss_videocall_location']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='show_as']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='privacy']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <!--            <xpath expr="//form[1]/sheet[1]/group[1]/group[1]/label[6]" position="replace"/>-->
+            <!--            <xpath expr="//form[1]/sheet[1]/group[1]/group[1]/label[5]" position="replace"/>-->
+        </field>
+    </record>
+
+
+    <!-- Heredar la vista de calendario para añadir el campo personalizado -->
+    <record id="view_calendar_event_calendar_inherit" model="ir.ui.view">
+        <field name="name">calendar.event.calendar.inherit</field>
+        <field name="model">calendar.event</field>
+        <field name="inherit_id" ref="calendar.view_calendar_event_calendar"/>
+        <field name="arch" type="xml">
+            <!-- Agregar el atributo default_view="day" al tag <calendar> -->
+            <xpath expr="//calendar" position="attributes">
+                <attribute name="mode">day</attribute>
+                <attribute name="color">bg_color</attribute>
+                <attribute name="event_open_popup">0</attribute>
+                <!--                <attribute name="js_class">attendee_calendar, calendar_custom</attribute>-->
+            </xpath>
+            <!-- Añadir el campo al calendario -->
+            <xpath expr="//calendar" position="inside">
+
+                <field name="state_color" invisible="1"/>
+                <field name="patient_name" invisible="1"/>
+                <field name="mobile" invisible="1"/>
+                <field name="description" widget="htlm" invisible="1"/>
+                <field name="description_plain" invisible="0" string="Descripción"/>
+                <field name="state_appointment"/>
+                <field name="joint_calendar_id" invisible="1"/>
+                <field name="assignee_user_id"
+                       options="{'icon': 'fa fa-calendar-check-o'}" filters="1" widget="many2one_avatar_user"
+                       domain="[('joint_calendar_id', '=', id)]"/>
+                <field name="bg_color" invisible="1"/>
+
+            </xpath>
+        </field>
+    </record>
+
+
+    <!--    &lt;!&ndash; Acción y menú para acceder al calendario personalizado &ndash;&gt;-->
+    <!--    <record id="action_calendar_custom" model="ir.actions.act_window">-->
+    <!--        <field name="name">Calendar Custom</field>-->
+    <!--        <field name="res_model">calendar.event</field>-->
+    <!--        <field name="view_mode">calendar,form,kanban</field>-->
+    <!--        <field name="context">{}</field>-->
+    <!--    </record>-->
+
+    <!--    <menuitem id="calendar_custom_menu_root" name="Custom Calendar"-->
+    <!--              parent="calendar.mail_menu_calendar" sequence="10"/>-->
+    <!--    <menuitem id="calendar_custom_menu" name="Calendar Custom"-->
+    <!--              parent="calendar_custom_menu_root" action="action_calendar_custom" sequence="1"/>-->
+
+
+    <record id="view_calendar_event_tree_inherit_add_button" model="ir.ui.view">
+        <field name="name">calendar.event.tree.inherit.add.whatsapp.button</field>
+        <field name="model">calendar.event</field>
+        <field name="inherit_id" ref="calendar.view_calendar_event_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_open_whatsapp_wizard"
+                        string="Enviar WhatsApp"
+                        type="object"
+                        class="oe_highlight"
+                        icon="fa-whatsapp"/>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="after">
+                <!--                <field name="state_color_id" invisible="1"/>-->
+                <!--                <field name="state_color" optional="show" widget="color" readonly="True"-->
+                <!--                       invisible="state_color_id == 7"/>-->
+                <!--                <button name="do_tentative" invisible="state not in ('needsAction', 'declined', 'accepted')"-->
+                <!--                        string="Uncertain" type="object" icon="fa-asterisk"/>-->
+
+                <field name="state_appointment" optional="show" widget="selection_badge"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

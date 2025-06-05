@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_calendar_whatsapp_wizard_form" model="ir.ui.view">
+        <field name="name">calendar.whatsapp.wizard.form</field>
+        <field name="model">calendar.whatsapp.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Enviar WhatsApp">
+                <group>
+                <group>
+                    <field name="res_model" invisible="1"/>
+                    <field name="recipient_count" readonly="1"/>
+                    <field name="template_id" options="{'no_create_edit': True, 'no_create': True, 'no_open': True}"
+                           domain="[('model', '=', res_model), ('status', '=', 'approved')]"/>
+                    <field name="event_ids" invisible="1"/>
+                    <field name="participant_ids" invisible="1"/>
+
+                </group>
+                <group>
+                    <div colspan="2">
+                        <field name="preview_whatsapp" no_label="1" invisible="not preview_whatsapp"/>
+                    </div>
+                </group>
+                </group>
+                <footer>
+                    <button name="action_send_whatsapp" string="Enviar WhatsApp" type="object" class="btn-primary"/>
+                    <button string="Cancelar" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

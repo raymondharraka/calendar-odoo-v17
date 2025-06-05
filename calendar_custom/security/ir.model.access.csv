@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_appointment_state,access_appointment_state,model_appointment_state,calendar_custom.group_superadmin,1,1,1,0
+access_joint_calendar_clodofy,access_joint_calendar_clodofy,model_joint_calendar_clodofy,base.group_erp_manager,1,1,1,1

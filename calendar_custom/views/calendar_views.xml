@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_calendar_event_form_inherit_domain_assignee" model="ir.ui.view">
+        <field name="name">calendar.event.form.inherit.assignee.domain</field>
+        <field name="model">calendar.event</field>
+        <field name="inherit_id" ref="calendar_resource_base_mac5.view_calendar_event_form"/>
+        <field name="arch" type="xml">
+            <field name="assignee_user_id" position="attributes">
+                <attribute name="domain">[('joint_calendar_id', '=', joint_calendar_id)]</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="calendar_event_assignee_view_calendar_inherit_custom_color" model="ir.ui.view">
+        <field name="name">calendar.event.assignee.view.calendar.inherit.bg_color</field>
+        <field name="model">calendar.event</field>
+        <field name="inherit_id" ref="calendar_resource_assignee_mac5.calendar_event_assignee_view_calendar"/>
+        <field name="arch" type="xml">
+            <calendar position="attributes">
+                <attribute name="color">bg_color</attribute>
+            </calendar>
+        </field>
+    </record>
+</odoo>

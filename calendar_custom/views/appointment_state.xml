@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+
+    <!-- Acción y Vista de Lista -->
+    <record id="action_appointment_states" model="ir.actions.act_window">
+        <field name="name">Estados de Cita</field>
+        <field name="res_model">appointment.state</field>
+        <!--        <field name="view_mode">tree,form</field>-->
+        <field name="view_mode">tree</field>
+    </record>
+
+    <!-- Vista Tree -->
+    <record id="view_appointment_state_tree" model="ir.ui.view">
+        <field name="name">appointment.state.tree</field>
+        <field name="model">appointment.state</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="color" widget="color"/>
+                <field name="active" widget="boolean_toggle" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vista Form -->
+    <!--    <record id="view_appointment_state_form" model="ir.ui.view">-->
+    <!--        <field name="name">appointment.state.form</field>-->
+    <!--        <field name="model">appointment.state</field>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <form>-->
+    <!--                <sheet>-->
+    <!--                    <group>-->
+    <!--                        <field name="name"/>-->
+    <!--                        <field name="code"/>-->
+    <!--                        <field name="active"/>-->
+    <!--                        <field name="sequence"/>-->
+    <!--                    </group>-->
+    <!--                </sheet>-->
+    <!--            </form>-->
+    <!--        </field>-->
+    <!--    </record>-->
+
+    <!-- Menú Principal en Configuración -->
+    <menuitem
+            id="menu_calendar_custom"
+            name="Calendar Custom"
+            parent="calendar.calendar_menu_config"
+            sequence="100"
+            groups="calendar_custom.group_superadmin"
+    />
+    <!-- Submenú para Estados de Cita -->
+    <!--    <menuitem-->
+    <!--            id="menu_appointment_states"-->
+    <!--            name="Estados de Cita"-->
+    <!--            parent="calendar_custom.menu_calendar_custom"-->
+    <!--            action="action_appointment_states"-->
+    <!--            sequence="10"-->
+    <!--    />-->
+</odoo>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="custom_calendar_enhancements.AttendeeCalendarCommonRenderer.event.inherit"
+       t-inherit="calendar.AttendeeCalendarCommonRenderer.event"
+       t-inherit-mode="extension"
+       priority="16">
+        <!--        <xpath expr="//div[hasclass('fc-content')]" position="inside">-->
+        <!--        <xpath expr="//div[contains(@class, 'o_event_title') and contains(@class, 'text-truncate')]" position="inside">-->
+        <xpath expr="//span[@t-esc='title']" position="before">
+            <t t-if="!isMonth and !isSmall">
+
+                <div>
+                    <t t-if="rawRecord.state_appointment">
+                        <t t-if="rawRecord.state_appointment[0] == 7">
+                            <i class="rounded-circle fs-6 text-success fa fa-check-circle mt-1 mr4 position-relative"/>
+                        </t>
+                        <t t-else="">
+                            <span class="mt-1 mr4"
+                                  t-att-style="'display:inline-block; width:10px; height:10px; border-radius:30px; background-color: ' + rawRecord.state_color + ';'"/>
+                        </t>
+                    </t>
+                    <i class="fa-fw fa fa-users"> <t t-esc="rawRecord.patient_name"/></i>
+                </div>
+                <!--                <div class="mi_clase_personalizada_para_el_div">-->
+
+                <!--                    <p>Estado de la Cita:-->
+                <!--                        &lt;!&ndash;                        <t t-debug=""/>&ndash;&gt;-->
+                <!--                        <span t-if="rawRecord.state_appointment" t-esc="rawRecord.state_appointment[1]"/>-->
+                <!--                    </p>-->
+
+                <!--                </div>-->
+            </t>
+        </xpath>
+        <xpath expr="//t[@t-if='!isAllDay and !isMonth and !isSmall']" position="after">
+            <t t-if="!isMonth and !isSmall">
+                <div>
+                    <!-- <t t-debug=""/>-->
+                    <div t-if='rawRecord.mobile' class="form-group">
+                        <i class="fa-fw fa fa-phone"> <t t-esc="rawRecord.mobile"/></i>
+                    </div>
+                    <div t-if='rawRecord.state_appointment' class="form-group">
+                        <i class="fa-fw fa fa-info-circle"> <t t-esc="rawRecord.state_appointment[1]"/></i>
+                    </div>
+
+                    <div t-if="rawRecord.description_plain">
+
+                            <div class="html-content-viewer" style="word-wrap: break-word; white-space: pre-wrap">
+                                <i class="fa-fw fa fa-clipboard"/>
+                                <t t-raw="rawRecord.description_plain"/>
+                            </div>
+
+                        <!--                        <a t-if="rawRecord.description_plain.length > 20"-->
+                        <!--                           href="#"-->
+                        <!--                           onclick="return false;">ver más</a>-->
+                    </div>
+                </div>
+            </t>
+        </xpath>
+    </t>
+
+</templates>
+

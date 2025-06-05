@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Grupo Superadmin -->
+    <record id="group_superadmin" model="res.groups">
+        <field name="name">Superadmin Calendar Custom</field>
+        <field name="users" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <!-- Reglas de Acceso -->
+    <record id="appointment_state_rule" model="ir.rule">
+        <field name="name">Solo Superadmin: Estados de Cita</field>
+        <field name="model_id" ref="model_appointment_state"/>
+        <field name="groups" eval="[Command.link(ref('calendar_custom.group_superadmin'))]"/>
+        <field name="domain_force">[(1, '=', 1)]</field> <!-- Acceso total -->
+    </record>
+
+    <record id="model_calendar_whatsapp_wizard_access_user" model="ir.model.access">
+      <field name="name">calendar.whatsapp.wizard user access</field>
+      <field name="model_id" ref="model_calendar_whatsapp_wizard"/>
+      <field name="group_id" ref="base.group_user"/>
+      <field name="perm_read" eval="1"/>
+      <field name="perm_write" eval="1"/>
+      <field name="perm_create" eval="1"/>
+      <field name="perm_unlink" eval="0"/>
+    </record>
+</odoo>

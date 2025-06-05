@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="calendar_event_type_tag_nuevo" model="calendar.event.type">
+      <field name="name">Nuevo</field>
+      <field name="color">3</field> <!-- 3 es amarillo claro -->
+    </record>
+</odoo>
